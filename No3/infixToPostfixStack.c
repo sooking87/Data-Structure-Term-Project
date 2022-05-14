@@ -72,7 +72,6 @@ int peek(LinkedStackType *s)
     }
     else // 최상위 노드의 값을 리턴함
     {
-        // printf("peek : s->top->item: %d\n", s->top->item);
         return s->top->item;
     }
 }
@@ -116,7 +115,6 @@ void infix_to_postfix(char exp[], char str[])
             // 스택에 있는 연산자의 우선순위가 더 크거나 같으면 출력
             while (!is_empty(&s) && (prec(ch) <= prec(peek(&s))))
             {
-                // printf("operator(peek): %c\n", operator(peek(&s)));
                 str[k++] = pop(&s);
                 // printf("%c", pop(&s));
             }
@@ -135,7 +133,6 @@ void infix_to_postfix(char exp[], char str[])
             }
             break;
         default:
-
             str[k++] = ch;
             //	printf("%c", ch);
             break;
@@ -210,3 +207,5 @@ int main()
 
     return 0;
 }
+
+// https://gist.github.com/blood72/81a76690b64d3022bc9868c19454dd9f
