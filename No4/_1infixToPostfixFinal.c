@@ -1,3 +1,15 @@
+/* ============================================================================================================================================================================= */
+/*
+프로젝트명 : Project #4 :: Expression Stack using Linked List.
+작성자 : IT공학전공_2116313_손수경
+작성일 : 2022-05-07~2022-05-09
+사용언어 : C언어
+알고리즘 설명 :
+참고한 알고리즘 : 수업 시간에 다룬 infix_to_postfix 알고리즘 및 개념, 수업 교재
+도움을 준 동료 : 없음
+*/
+/* ============================================================================================================================================================================= */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -43,7 +55,7 @@ void push(linkedList *stack, int data)
         exit(1);
     }
     newNode->data = data; // data 넣고
-    printf("push할 data: %c or %d\n", newNode->data, newNode->data);
+    // printf("push할 data: %c or %d\n", newNode->data, newNode->data);
     newNode->rlink = stack->top; // 첫 노드의 rlink = NULL로 첫 노드가 아니면 top이 가리키던 노드를 가리킴
     stack->top = newNode;        // top을 새로운 노드에 연결
 
@@ -58,7 +70,7 @@ void push(linkedList *stack, int data)
         newNode->llink = NULL;
     }
     stack->length++;
-    printf("stack->length: %d\n", stack->length);
+    // printf("stack->length: %d\n", stack->length);
 }
 
 int pop(linkedList *stack)
@@ -171,7 +183,6 @@ void infix_to_postfix(char exp[], linkedList *str)
 
 int Calculate(linkedList *str)
 {
-    printf("Calculate 호출\n");
     char ch;
     int num;                // operand를 저장하기 위한 임시 변수
     int operand1, operand2; // 연산자가 나타났을 경우 pop한 두 피연산자를 넣을 임시 변수
@@ -223,7 +234,7 @@ int main()
     printf("This Project is No_4 :: Expression Stack using Linked List.\n");
     printf("Please Cheer Up ! Until 2022.05.23\n\n");
 
-    char *data;
+    char *data; // 입력받은 infix 수식
     data = (char *)malloc(sizeof(char) * 100);
     linkedList *str; // postfix가 들어가있는 스택
     str = createStack();
@@ -233,5 +244,5 @@ int main()
 
     infix_to_postfix(data, str);
     int result = Calculate(str);
-    printf("result = %d\n", result);
+    printf("%s = %d\n", data, result);
 }
