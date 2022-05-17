@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #define LENGTH 11
 typedef struct data
 {
@@ -33,7 +34,7 @@ SinglyCircularLL *createList()
     H->crnt->rlink = H->crnt;
     H->head->rlink = H->head;
     // printf("원형 연결 리스트 만들고\n");
-    printf("빈 리스트 생성 완료\n");
+    // printf("빈 리스트 생성 완료\n");
     return H;
 }
 
@@ -61,7 +62,7 @@ void addLast(SinglyCircularLL *list, element *item)
 
     if (isEmpty(list))
     {
-        printf("첫 노드라면\n");
+        // printf("첫 노드라면\n");
         list->head->rlink = newNode;
         list->crnt->rlink = newNode;
     }
@@ -72,10 +73,9 @@ void addLast(SinglyCircularLL *list, element *item)
     // printf("list->crnt = %p / list->crnt->rlink = %p\n", list->crnt, list->crnt->rlink);
     list->length++;
     // printf("들어간 노드: 번호->%d / 이름->%s\n", list->crnt->data.num, list->crnt->data.name);
-    // printf("%d. %s 노드 push 완료\n", newNode->data.num, newNode->data.name);
     // printf("list->length: %d\n\n", list->length);
-    printf("list->head->rlink->data.num = %d\n", list->head->rlink->data.num);
-    printf("list->crnt->rlink->data.num = %d\n", list->crnt->rlink->data.num); // 예상: All 1번(첫 번째 노드를 가리키게 하고 싶으므로 )
+    // printf("list->head->rlink->data.num = %d\n", list->head->rlink->data.num);
+    // printf("list->crnt->rlink->data.num = %d\n", list->crnt->rlink->data.num); // 예상: All 1번(첫 번째 노드를 가리키게 하고 싶으므로 )
 }
 
 element *delete (SinglyCircularLL *list)
@@ -88,42 +88,49 @@ element *delete (SinglyCircularLL *list)
     else
     {
         Node *remove = list->crnt; // 현재 가리키는 노드를 삭제할 노드라고 함.
-        Node *prev = list->head;   // 첫 번째 노드부터! 반복문 돌리면서 crnt 전 노드를 찾을 예정
         // remove->data = list->crnt->data;
         element *returnData = &(remove->data);
         // 만약에 첫 번째 노드가 지워질 경우, 다음 노드를 head노드로 변경
-        // printf("remove->data.num = %d\n", remove->data.num);
+        printf("remove->data.num = %d\n", remove->data.num);
         // printf("prev->data.num = %d\n", prev->rlink->data.num);
-        if (remove->data.num == list->head->rlink->data.num)
+        if (remove->rlink->data.num == list->head->rlink->data.num)
         {
-            // printf("else문의 if문 들어옴\n");
+            printf("else문의 if문 들어옴\n");
             list->head = remove->rlink;
-            prev = list->head;
             // printf("prev->data.num = %d\n", prev->data.num);
+        }
+        Node *prev = list->head; // prev는 지울 노드의 전 노드
+        printf("list->head->data.num = %d\n", list->head->rlink->data.num);
+        while (prev->rlink->data.num != remove->data.num)
+        {
+            prev = prev->rlink;
         }
         // printf("returnData->num = %d\n", returnData->num);
-        int cnt = 0; // 반복문이 몇 번 도는지 확인하기 위한 임시 변수
-
-        // for (int i = 0; i < 5; i++)
-        while (prev->rlink != remove)
-        {
-            cnt++;
-            prev = prev->rlink;
-            // printf("prev->data.num = %d\n", prev->data.num);
-        }
-        // 반복문 끝나면 prev는 지울 노드의 전 노드가 됨. -> 그 prev를 crnt로 바꿀 예정
+        printf("prev->rlink->data.num = %d\n", prev->rlink->data.num);
+        list->crnt = remove->rlink; // skipNum의 규칙을 맞추기 위해서 지운 노드를 crnt로 바꿈
         prev->rlink = remove->rlink;
-        // printf("prev->rlink->data.num = %d\n", prev->rlink->data.num);
-        list->crnt = prev;
         // printf("list->crnt->data.num = %d\n", list->crnt->data.num);
         // printf("cnt = %d\n", cnt);
-        // printf("delete 함수 정상 종료\n");
         list->length--;
         // printf("list->length = %d\n", list->length);
-        // free(remove); -> 메인에서 출력해야되므로 삭제하면 안됨.
+        free(remove);
+        // printf("delete 함수 정상 종료\n");
         return returnData;
     }
 }
+
+void moveCrnt(SinglyCircularLL *list, int skipNum)
+{
+    Node *ptr = list->crnt;
+    for (int i = 0; i < skipNum; i++)
+    {
+        ptr = ptr->rlink;
+    }
+    list->crnt = ptr;
+    // printf("moveCrnt 함수: list->crnt->data.num(remove 노드) = %d\n", list->crnt->data.num);
+    delete (list);
+}
+
 int main()
 {
     printf("I am Sohn Soo Kyoung\n");
@@ -155,6 +162,7 @@ int main()
         addLast(pplList, item);
     }
 
+    /*
     // push 확인
     Node *test = pplList->crnt; // 예상: 11 -> 1 -> 2....
     printf("\nMain\n");
@@ -168,12 +176,45 @@ int main()
         printf("test->rlink: %p\n", test->rlink);
     }
     printf("push 확인을 위한 출력 종료\n\n");
+    */
 
+    /*
     // delete 확인
     // pplList->crnt = pplList->crnt->rlink; // crnt를 1로 맞춤
     for (int i = 0; i < LENGTH; i++)
     {
         element *deletedNode = delete (pplList);
         printf("%d. %s 노드 delete 완료\n", deletedNode->num, deletedNode->name);
+    }
+    */
+
+    // 시작이 1부터라고 가정
+    pplList->crnt = pplList->crnt->rlink;
+    // printf("pplList->crnt = %d\n", pplList->crnt->data.num);
+
+    srand(time(NULL));
+    // int skipNum = rand() % 9 + 1;
+    int skipNum = 3;
+    printf("skipNum = %d\n", skipNum);
+
+    while (pplList->length > 3)
+    {
+        moveCrnt(pplList, skipNum);
+    }
+
+    Node *finalList = pplList->head->rlink;
+    printf("%d번 %s 님 입니다. ^^\n", finalList->data.num, finalList->data.name);
+    printf("배를 타고 무인도를 탈출할 최종 3인은 ");
+    for (int i = 0; i < 3; i++)
+    {
+        if (i == 2)
+        {
+            printf("%d번 %s 님 입니다. ^^\n", finalList->data.num, finalList->data.name);
+        }
+        else
+        {
+            printf("%d번 %s 님, ", finalList->data.num, finalList->data.name);
+        }
+        finalList = finalList->rlink;
     }
 }

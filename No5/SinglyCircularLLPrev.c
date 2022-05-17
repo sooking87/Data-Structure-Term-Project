@@ -88,7 +88,6 @@ element *delete (SinglyCircularLL *list)
     else
     {
         Node *remove = list->crnt; // 현재 가리키는 노드를 삭제할 노드라고 함.
-        Node *prev = list->head;   // 첫 번째 노드부터! 반복문 돌리면서 crnt 전 노드를 찾을 예정
         // remove->data = list->crnt->data;
         element *returnData = &(remove->data);
         // 만약에 첫 번째 노드가 지워질 경우, 다음 노드를 head노드로 변경
@@ -98,23 +97,13 @@ element *delete (SinglyCircularLL *list)
         {
             // printf("else문의 if문 들어옴\n");
             list->head = remove->rlink;
-            prev = list->head;
             // printf("prev->data.num = %d\n", prev->data.num);
         }
         // printf("returnData->num = %d\n", returnData->num);
         int cnt = 0; // 반복문이 몇 번 도는지 확인하기 위한 임시 변수
 
-        // for (int i = 0; i < 5; i++)
-        while (prev->rlink != remove)
-        {
-            cnt++;
-            prev = prev->rlink;
-            // printf("prev->data.num = %d\n", prev->data.num);
-        }
-        // 반복문 끝나면 prev는 지울 노드의 전 노드가 됨. -> 그 prev를 crnt로 바꿀 예정
-        prev->rlink = remove->rlink;
         // printf("prev->rlink->data.num = %d\n", prev->rlink->data.num);
-        list->crnt = prev;
+        list->crnt = remove->rlink;
         // printf("list->crnt->data.num = %d\n", list->crnt->data.num);
         // printf("cnt = %d\n", cnt);
         // printf("delete 함수 정상 종료\n");
@@ -170,7 +159,7 @@ int main()
     printf("push 확인을 위한 출력 종료\n\n");
 
     // delete 확인
-    // pplList->crnt = pplList->crnt->rlink; // crnt를 1로 맞춤
+    pplList->crnt = pplList->crnt->rlink; // crnt를 1로 맞춤
     for (int i = 0; i < LENGTH; i++)
     {
         element *deletedNode = delete (pplList);

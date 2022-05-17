@@ -37,12 +37,14 @@ SinglyCircularLL *createList()
     return H;
 }
 
+// -> ok
 int isEmpty(SinglyCircularLL *list)
 {
     printf("isEmpty 호출: 결과 -> %d\n", list->crnt->rlink == list->crnt);
     // 1: true, 0: false
-    return (list->crnt->rlink == list->crnt);
+    return (list->head->rlink == list->head);
 }
+// -> ok
 void addLast(SinglyCircularLL *list, element *item)
 {
     Node *newNode = (Node *)malloc(sizeof(Node));
@@ -55,22 +57,25 @@ void addLast(SinglyCircularLL *list, element *item)
     }
     newNode->data.num = item->num;
     strcpy(newNode->data.name, item->name);
-    printf("newNode: %p\n", newNode);
+    // printf("newNode: %p\n", newNode);
 
     if (isEmpty(list))
     {
         printf("첫 노드라면\n");
         list->head->rlink = newNode;
+        list->crnt->rlink = newNode;
     }
-    newNode->rlink = list->crnt->rlink;
-    list->crnt->rlink = newNode;
-    list->crnt = newNode;
-    printf("list->head: %p\n", list->head);
-    printf("list->crnt = %p / list->crnt->rlink = %p\n", list->crnt, list->crnt->rlink);
+    newNode->rlink = list->crnt->rlink; // 원래 의도 : 1번 노드랑 연결, 근데 출력 결과 : 이 부분이 적용 X -> 왜?
+    list->crnt->rlink = newNode;        // 추가되기 전 노드의 오른쪽링크(1번 노드)에 새로운 노드를 연결
+    list->crnt = newNode;               // 가리키는 노드를 추가된 노드로 이동
+    // printf("list->head: %p\n", list->head);
+    // printf("list->crnt = %p / list->crnt->rlink = %p\n", list->crnt, list->crnt->rlink);
     list->length++;
-    printf("들어간 노드: 번호->%d / 이름->%s\n", list->crnt->data.num, list->crnt->data.name);
-    printf("%d. %s 노드 push 완료\n", newNode->data.num, newNode->data.name);
-    printf("list->length: %d\n\n", list->length);
+    // printf("들어간 노드: 번호->%d / 이름->%s\n", list->crnt->data.num, list->crnt->data.name);
+    // printf("%d. %s 노드 push 완료\n", newNode->data.num, newNode->data.name);
+    // printf("list->length: %d\n\n", list->length);
+    printf("list->head->rlink->data.num = %d\n", list->head->rlink->data.num);
+    printf("list->crnt->rlink->data.num = %d\n", list->crnt->rlink->data.num); // 예상: All 1번(첫 번째 노드를 가리키게 하고 싶으므로 )
 }
 
 int main()
@@ -106,16 +111,18 @@ int main()
 
     // push 확인
     Node *test = pplList->crnt; // 예상: 11 -> 1 -> 2....
-    printf("Main\n");
-    // while (test->rlink != pplList->crnt)
-    for (int i = 0; i < LENGTH; i++)
+    printf("\nMain\n");
+    printf("pplList->crnt: %p\n", pplList->crnt->rlink);
+    while (test->rlink != pplList->crnt)
+    // for (int i = 0; i < LENGTH; i++)
     {
-        test = test->rlink; // 왜 이동이 안되지?
+        test = test->rlink;
         printf("%d. %s 노드 push 완료\n", test->data.num, test->data.name);
         if (test == pplList->head)
         {
             printf("더미 노드 가리킴\n");
         }
+        printf("test: %p\n", test);
         printf("test->rlink: %p\n", test->rlink);
     }
 }
