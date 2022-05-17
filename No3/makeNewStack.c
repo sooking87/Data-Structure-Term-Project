@@ -1,6 +1,6 @@
 #include <stdio.h>
 #define STACK_SIZE 100
-// í¬ì¸í„°ë¥¼ ì´ìš©í•´ì„œ ë°°ì—´ì„ ë§Œë“¤ ì˜ˆì •
+// Æ÷ÀÎÅÍ¸¦ ÀÌ¿ëÇØ¼­ ¹è¿­À» ¸¸µé ¿¹Á¤
 
 typedef int element;
 typedef struct
@@ -21,16 +21,16 @@ char *makeNewNode()
 
 void push(int *top, element item)
 {
-    // printf("pushí•¨ìˆ˜ì—ì„œ item: %d\n", item);
+    // printf("pushÇÔ¼ö¿¡¼­ item: %d\n", item);
     if (isFull(top) == 1)
     {
         printf("Stack is FULL\n");
         exit(1);
     }
-    // printf("push ì´ì „ &top: %d\n", *top);
+    // printf("push ÀÌÀü &top: %d\n", *top);
     stack[++(*top)] = item;
     stack[0]++;
-    // printf("push ì´í›„ &top: %d\n", *top);
+    // printf("push ÀÌÈÄ &top: %d\n", *top);
 }
 
 int main()
@@ -39,8 +39,7 @@ int main()
     push()
 }
 
-
-// í—¤ë” ë…¸ë“œ ë§Œë“¤ê¸° -> ê¸¸ì´ ì •ë³´ë¥¼ ë‹´ê³  ìžˆìŒ ë”°ë¼ì„œ stack[0]ì€ ê¸¸ì´ë¥¼ ë§í•¨.
+// Çì´õ ³ëµå ¸¸µé±â -> ±æÀÌ Á¤º¸¸¦ ´ã°í ÀÖÀ½ µû¶ó¼­ stack[0]Àº ±æÀÌ¸¦ ¸»ÇÔ.
 // -> ok
 /*
 void createStack(int *top)
@@ -48,7 +47,7 @@ void createStack(int *top)
     int len = 0;
     *top = -1;
     stack[++(*top)] = len;
-    // printf("createHeader ì´í›„ &top: %d\n", *top);
+    // printf("createHeader ÀÌÈÄ &top: %d\n", *top);
 }
 */
 // -> ok

@@ -36,16 +36,16 @@ int isEmpty(int *top)
     }
 }
 
-void infix_to_postfix(char[] F_original) {
-    while (true) {
-
+void infix_to_postfix(char[] F_original)
+{
+    while (true)
+    {
     }
 }
 
-char getToken(char[] F_original) {
-    
+char getToken(char[] F_original)
+{
 }
-
 
 int main()
 {
