@@ -1,3 +1,15 @@
+/* ============================================================================================================================================================================= */
+/*
+프로젝트명 : Project #5 :: Singly Circular Linked List for Escaping Island.
+작성자 : IT공학전공_2116313_손수경
+작성일 : 2022-05-07~2022-05-09
+사용언어 : C언어
+알고리즘 설명 :
+참고한 알고리즘 : 수업 시간에 다룬 단순 원형 리스트 노드 생성 ppt 부분
+도움을 준 동료 : 없음
+*/
+/* ============================================================================================================================================================================= */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -93,20 +105,20 @@ element *delete (SinglyCircularLL *list)
         // 만약에 첫 번째 노드가 지워질 경우, 다음 노드를 head노드로 변경
         printf("remove->data.num = %d\n", remove->data.num);
         // printf("prev->data.num = %d\n", prev->rlink->data.num);
-        if (remove->rlink->data.num == list->head->rlink->data.num)
+        if (remove->data.num == list->head->rlink->data.num)
         {
-            printf("else문의 if문 들어옴\n");
-            list->head = remove->rlink;
+            // printf("else문의 if문 들어옴\n");
+            list->head->rlink = remove->rlink;
             // printf("prev->data.num = %d\n", prev->data.num);
         }
         Node *prev = list->head; // prev는 지울 노드의 전 노드
-        printf("list->head->data.num = %d\n", list->head->rlink->data.num);
+        // printf("list->head->data.num = %d\n", list->head->rlink->data.num);
         while (prev->rlink->data.num != remove->data.num)
         {
             prev = prev->rlink;
         }
         // printf("returnData->num = %d\n", returnData->num);
-        printf("prev->rlink->data.num = %d\n", prev->rlink->data.num);
+        // printf("prev->rlink->data.num = %d\n", prev->rlink->data.num);
         list->crnt = remove->rlink; // skipNum의 규칙을 맞추기 위해서 지운 노드를 crnt로 바꿈
         prev->rlink = remove->rlink;
         // printf("list->crnt->data.num = %d\n", list->crnt->data.num);
@@ -193,8 +205,8 @@ int main()
     // printf("pplList->crnt = %d\n", pplList->crnt->data.num);
 
     srand(time(NULL));
-    // int skipNum = rand() % 9 + 1;
-    int skipNum = 3;
+    int skipNum = rand() % 9 + 1;
+    // int skipNum = 3;
     printf("skipNum = %d\n", skipNum);
 
     while (pplList->length > 3)
