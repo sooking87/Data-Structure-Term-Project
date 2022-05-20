@@ -29,7 +29,7 @@ typedef struct Node
 
 typedef struct Header
 {
-    int length; // push, pop 메소드를 정의할 때 편의성을 위해서 넣었습니다.
+    int length; // addLast, delete 메소드를 정의할 때 편의성을 위해서 넣었습니다.
     Node *crnt; // current의 약자로 현재 가리키고 있는 노드를 의미합니다.
     Node *head; // 첫 번째 노드를 가리킵니다.
 } SinglyCircularLL;
@@ -78,7 +78,7 @@ void addLast(SinglyCircularLL *list, element *item)
         list->head->rlink = newNode;
         list->crnt->rlink = newNode;
     }
-    newNode->rlink = list->crnt->rlink; // 원래 의도 : 1번 노드랑 연결, 근데 출력 결과 : 이 부분이 적용 X -> 왜?
+    newNode->rlink = list->crnt->rlink; // newNode를 첫 번째 노드에 연결
     list->crnt->rlink = newNode;        // 추가되기 전 노드의 오른쪽링크(1번 노드)에 새로운 노드를 연결
     list->crnt = newNode;               // 가리키는 노드를 추가된 노드로 이동
     // printf("list->head: %p\n", list->head);
