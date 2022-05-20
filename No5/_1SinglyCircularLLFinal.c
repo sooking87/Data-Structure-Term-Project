@@ -2,7 +2,7 @@
 /*
 프로젝트명 : Project #5 :: Singly Circular Linked List for Escaping Island.
 작성자 : IT공학전공_2116313_손수경
-작성일 : 2022-05-07~2022-05-09
+작성일 : 2022-05-11~2022-05-15
 사용언어 : C언어
 알고리즘 설명 :
 참고한 알고리즘 : 수업 시간에 다룬 단순 원형 리스트 노드 생성 ppt 부분
@@ -68,11 +68,12 @@ void addLast(SinglyCircularLL *list, element *item)
         fprintf(stderr, "메모리 할당 에러\n");
         exit(1);
     }
+    /* 데이터 넣기 */
     newNode->data.num = item->num;
     strcpy(newNode->data.name, item->name);
     // printf("newNode: %p\n", newNode);
 
-    if (isEmpty(list))
+    if (isEmpty(list)) // 헤더 노드와의 연결을 바꾸어주어야 하므로 따로 처리가 필요
     {
         // printf("첫 노드라면\n");
         list->head->rlink = newNode;
@@ -90,7 +91,7 @@ void addLast(SinglyCircularLL *list, element *item)
     // printf("list->crnt->rlink->data.num = %d\n", list->crnt->rlink->data.num); // 예상: All 1번(첫 번째 노드를 가리키게 하고 싶으므로 )
 }
 
-element *delete (SinglyCircularLL *list)
+void delete (SinglyCircularLL *list) // 코드 작성 과정에서는 지워진 노드의 확인을 위해서 element *를 리턴형으로 잡았습니다. 하지만 전반적인 출력 과정에서는 필요가 없으므로 void로 바꾸었습니다.
 {
     if (list->length == 0)
     {
@@ -101,9 +102,8 @@ element *delete (SinglyCircularLL *list)
     {
         Node *remove = list->crnt; // 현재 가리키는 노드를 삭제할 노드라고 함.
         // remove->data = list->crnt->data;
-        element *returnData = &(remove->data);
         // 만약에 첫 번째 노드가 지워질 경우, 다음 노드를 head노드로 변경
-        printf("remove->data.num = %d\n", remove->data.num);
+        // printf("remove->data.num = %d\n", remove->data.num);
         // printf("prev->data.num = %d\n", prev->rlink->data.num);
         if (remove->data.num == list->head->rlink->data.num)
         {
@@ -127,7 +127,6 @@ element *delete (SinglyCircularLL *list)
         // printf("list->length = %d\n", list->length);
         free(remove);
         // printf("delete 함수 정상 종료\n");
-        return returnData;
     }
 }
 
@@ -205,8 +204,8 @@ int main()
     // printf("pplList->crnt = %d\n", pplList->crnt->data.num);
 
     srand(time(NULL));
-    int skipNum = rand() % 9 + 1;
-    // int skipNum = 3;
+    // int skipNum = rand() % 9 + 1;
+    int skipNum = 3;
     printf("skipNum = %d\n", skipNum);
 
     while (pplList->length > 3)
