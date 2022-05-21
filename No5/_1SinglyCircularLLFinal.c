@@ -1,14 +1,28 @@
-/* ============================================================================================================================================================================= */
+/* =========================================================================================================================================================================== */
 /*
 프로젝트명 : Project #5 :: Singly Circular Linked List for Escaping Island.
 작성자 : IT공학전공_2116313_손수경
 작성일 : 2022-05-11~2022-05-15
 사용언어 : C언어
 알고리즘 설명 :
+1. 변수 설명
+    - crnt : current의 약자로 현재 가리키고 있는 노드를 뜻합니다. 추가될 때마다 crnt는 한 칸씩 뒤로 이동하며, 지울 노드를 가리키는 데에 사용됩니다.
+    - head->rlink : 가장 첫 번째 노드를 가리키며, 출력시 오름차순으로 출력될 수 있도록 합니다.
+    - skipNum : 규칙에 따라 탈출하지 못할 사람을 고르기 위한 숫자입니다. #include <time.h>에서 srand(time(NULL))을 사용해서 완벽한 랜덤 함수를 출력할 수 있도록 하였습니다. rand()의 경우는 특정 규칙이 있어 랜덤처럼 보이지만 사실 규칙이 정해져있으므로 srand()를 사용하였습니다.
+2. 함수 설명
+    - SinglyCircularLL *createList() :: 단순 원형 연결 리스트의 초기값을 만들어줍니다.
+    - int isEmpty(SinglyCircularLL *list) :: 리스트가 빈리스튼지 아닌지를 판별하여 리턴값이 1이면 true, 0이면 false입니다.
+    - void addLast(SinglyCircularLL *list, element *item) :: item을 데이터로 가지고 있는 Node를 list의 마지막 자리에 추가합니다.
+    - void delete (SinglyCircularLL *list) :: list에서 crnt가 가리키는 노드를 지웁니다.
+    - void moveCrnt(SinglyCircularLL *list, int skipNum) :: skipNum만큼 오른쪽으로 crnt를 이동시킵니다. 이 함수에서 지울 노드를 결정합니다.
+3. 진행 과정
+    1) 데이터를 연결 리스트에 추가합니다. (addLast() 사용)
+    2) 리스트의 길이가 3이 되기 전까지 반복문을 돌리면서 moveCrnt()를 통해서 crnt를 skipNum 만큼 이동시킨 후 delete()를 사용하여 crnt를 삭제합니다.
+    3) 리스트의 길이가 3이 되면 리스트의 데이터를 출력해줍니다.
 참고한 알고리즘 : 수업 시간에 다룬 단순 원형 리스트 노드 생성 ppt 부분
 도움을 준 동료 : 없음
 */
-/* ============================================================================================================================================================================= */
+/* =========================================================================================================================================================================== */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -204,8 +218,8 @@ int main()
     // printf("pplList->crnt = %d\n", pplList->crnt->data.num);
 
     srand(time(NULL));
-    // int skipNum = rand() % 9 + 1;
-    int skipNum = 3;
+    int skipNum = rand() % 9 + 1;
+    // int skipNum = 3;
     printf("skipNum = %d\n", skipNum);
 
     while (pplList->length > 3)
@@ -214,7 +228,7 @@ int main()
     }
 
     Node *finalList = pplList->head->rlink;
-    printf("%d번 %s 님 입니다. ^^\n", finalList->data.num, finalList->data.name);
+    // printf("%d번 %s 님 입니다. ^^\n", finalList->data.num, finalList->data.name);
     printf("배를 타고 무인도를 탈출할 최종 3인은 ");
     for (int i = 0; i < 3; i++)
     {
