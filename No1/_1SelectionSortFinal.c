@@ -1,4 +1,24 @@
+/* =========================================================================================================================================================================== */
+/*
+ÇÁ·ÎÁ§Æ®¸í : Project #1 :: Selection Sort using Array.
+ÀÛ¼ºÀÚ : IT°øÇĞÀü°ø_2116313_¼Õ¼ö°æ
+ÀÛ¼ºÀÏ : 2022-05-19~2022-05-19
+»ç¿ë¾ğ¾î : C¾ğ¾î
+¾Ë°í¸®Áò ¼³¸í :
+¸®½ºÆ® ±¸¼º °úÁ¤
+    ÀÔ·ÂÀÌ 12°³·Î ÀÌ·ç¾îÁø Á¤¼öÇüÀ» ³Ö±â À§ÇØ¼­ ±æÀÌ°¡ 12ÀÎ ¹è¿­À» »ç¿ëÇÏ¿´½À´Ï´Ù.
+ÇÔ¼ö ¼³¸í
+    -	void swap(int arr[], int length, int idx1, int idx2) : ¹è¿­ arr¿¡¼­ ÀÎµ¦½º°¡ idx1ÀÎ ¿ø¼Ò¿Í ÀÎµ¦½º°¡ idx2ÀÎ ¿ø¼Ò¸¦ ¹Ù²Ù¾î Áİ´Ï´Ù.
+    -	void SelectionSort(int arr[], int length) : ¼±ÅÃ Á¤·ÄÀ» À§ÇÑ ÇÔ¼öÀÔ´Ï´Ù. ÀÌÁß for¹®À» µ¹¸®¸é¼­ ¹Ù±ù for¹®¿¡¼­ÀÇ ÀÎµ¦½º¸¦ ºñ±³¸¦ À§ÇÑ ±âÁØÁ¡ÀÌ¶ó°í ÇßÀ» ¶§, ¾ÈÂÊ for¹®À» ¹Ù±ù for¹® ÀÎµ¦½º + 1ºÎÅÍ ³¡±îÁö ºñ±³¸¦ ÇÏ¸é¼­ ÃÖ¼Ò°ªÀ» ±¸ÇÕ´Ï´Ù. ±× ÈÄ, ±âÁØÁ¡°ú ÃÖ¼Ò°ªÀÇ À§Ä¡¸¦ ¹Ù²Ù¾îÁÖ´Â ¼±ÅÃ Á¤·Ä ¾Ë°í¸®ÁòÀÌ Àû¿ëµÈ ÇÔ¼öÀÔ´Ï´Ù.
+ÀüÃ¼ÀûÀÎ ÇÔ¼ö ÁøÇà ±¸Á¶
+    -	1). 12°³ÀÇ ¼ö¸¦ ÀÔ·ÂÀ» ¹ŞÀ¸¸é SelectionSort()·Î ³Ñ¾î°¡¼­ ¹è¿­ÀÇ ¼±ÅÃ Á¤·ÄÀ» ÁøÇàÇÕ´Ï´Ù. ±³È¯ÀÌ ¹ß»ıÇßÀ» ¶§¸¶´Ù ¹è¿­À» Ãâ·ÂÇÏ¶ó´Â Á¶°ÇÀÌ ÀÖ¾úÀ¸¹Ç·Î Á¶°Ç¿¡ ¸Â´Â swap()À» ¸¸µé¾ú½À´Ï´Ù.
+
+Âü°íÇÑ ¾Ë°í¸®Áò : °úÁ¦ Âü°í¿ë - ¼±ÅÃ Á¤·Ä pdf
+µµ¿òÀ» ÁØ µ¿·á : ¾øÀ½
+*/
+/* =========================================================================================================================================================================== */
 #include <stdio.h>
+#define _CRT_SECURE_NO_WARNINGS
 #define LENGTH 12
 
 void swap(int arr[], int length, int idx1, int idx2)
@@ -7,7 +27,7 @@ void swap(int arr[], int length, int idx1, int idx2)
     arr[idx1] = arr[idx2];
     arr[idx2] = temp;
 
-    printf("\nêµí™˜ ë°œìƒ\n");
+    printf("\n±³È¯ ¹ß»ı\n");
     for (int j = 0; j < length; j++)
     {
         printf("ArrL[%d] = %d\n", j, arr[j]);
@@ -19,6 +39,7 @@ void SelectionSort(int arr[], int length)
     for (int i = 0; i < length - 1; i++)
     {
         int minIdx = i;
+        // ÃÖ¼Ò ±¸ÇÏ±â
         for (int j = i + 1; j < length; j++)
         {
             if (arr[j] < arr[minIdx])
@@ -32,14 +53,16 @@ void SelectionSort(int arr[], int length)
 
 int main()
 {
+    printf("I am Sohn Soo Kyoung\n");
+    printf("This Project is No_1 :: Selection Sort using Array.\n");
+    printf("Please Cheer Up ! Until 2022.05.23\n\n");
     int ArrL[12];
-    int inputSize = 0;
-    int sum = 0;
-    double avg;
+    int inputSize = 0; // ÀÔ·Â¹ŞÀº ¸¸Å­ÀÇ ¿ø¼Ò¸¦ Ãâ·ÂÇÏ±â À§ÇÑ º¯¼ö
     for (int i = 0; i < LENGTH; i++)
     {
         scanf("%d", &ArrL[i]);
         inputSize++;
+        printf("\n%d´Ü°è: \n", inputSize);
         for (int j = 0; j < inputSize; j++)
         {
             printf("ArrL[%d] = %d\n", j, ArrL[j]);
@@ -48,13 +71,15 @@ int main()
 
     SelectionSort(ArrL, LENGTH);
 
-    printf("ìµœì¢… ë‚´ë¦¼ì°¨ìˆœ ì •ë ¬\n");
+    int sum = 0;
+    double avg;
+    printf("ÃÖÁ¾ ³»¸²Â÷¼ø Á¤·Ä\n");
     for (int i = LENGTH - 1; i >= 0; i--)
     {
         printf("ArrL[%d] = %d\n", i, ArrL[i]);
         sum += ArrL[i];
     }
     avg = sum / (double)LENGTH;
-    printf("ë°°ì—´ ë‚´ %dê°œì˜ ì›ì†Œ ê°’ì˜ í•©: %d\n", LENGTH, sum);
-    printf("ë°°ì—´ ë‚´ %dê°œì˜ ì›ì†Œ ê°’ì˜ í‰ê· : %f\n", LENGTH, avg);
+    printf("¹è¿­ ³» %d°³ÀÇ ¿ø¼Ò °ªÀÇ ÇÕ: %d\n", LENGTH, sum);
+    printf("¹è¿­ ³» %d°³ÀÇ ¿ø¼Ò °ªÀÇ Æò±Õ: %f\n", LENGTH, avg);
 }
