@@ -87,55 +87,16 @@ void swap(int *standard, int *min)
 void SelectionSort(BiDirectionCLL *bcList)
 {
     // 첫 번째 노드부터 시작
-    Node *standard = bcList->head; // crnt과 그 이후의 노드를 비교하면서 최소값을 찾을 것
-    while (standard->rlink != bcList->head)
+    Node *ptr = bcList->crnt;
+    while (ptr->rlink != bcList->crnt)
     {
-        Node *stTemp = standard;
-        Node *compare = standard->rlink; // 최소값을 구하기 위한 변수
-        Node *param;
-        int isChanged = 1;
-        // printf("standard->data: %d\n", standard->data);
-        // printf("compare->data 시작 지점: %d\n", compare->data);
-        while (compare != bcList->head)
-        {
-            // printf("비교해야되는 값: %d\n", min->data);
-            if (stTemp->data > compare->data)
-            {
-                isChanged = 0;
-                stTemp = compare;
-            }
-            // printf("기준이 되는 값: %d\n", standard->data);
-            //  printf("standard 이후 제일 작은 값: %d\n", param->data);
-            compare = compare->rlink;
-            // printf("안에 while문 종료조건: %d\n", compare != bcList->head);
-            // printf("isChanged = %d\n", isChanged);
-        }
-        // printf("\n최종 결과\n");
-        // printf("기준이 되는 값: %d\n", standard->data);
-        // printf("최종->standard 이후 제일 작은 값: %d\n", stTemp->data); // 최소값인 compare이 오른쪽으로 이동하고 반복문이 끝났으므로 왼쪽값의 data가 최솟값
-        if (isChanged == 0)
-        {
-            swap(&(standard->data), &(stTemp->data));
-            Node *afterChanged = bcList->head;
-            for (int i = 0; i < LENGTH; i++)
-            {
-                printf("%d 번째 노드 값: %d\n", (i + 1), afterChanged->data);
-                afterChanged = afterChanged->rlink;
-            }
-            printf("\n");
-        }
+        Node *standard = bcList->crnt;       // crnt과 그 이후의 노드를 비교하면서 최소값을 찾을 것
+        Node *compare = bcList->crnt->rlink; // 비교해야되는 기준을 정하기 위한 변수
+        // standard의 이동이 compare에도 영향을 미치는지
+        ptr = ptr->rlink;
         standard = standard->rlink;
-
-        /*
-        // swap이 발생했는지 확인
-        Node *willRemove = bcList->head;
-        for (int i = 0; i < 5; i++)
-        {
-            printf("%d 번째 노드 값: %d\n", (i + 1), willRemove->data);
-            willRemove = willRemove->rlink;
-        }
-        printf("\n");
-        */
+        printf("standard->data = %d\n", standard->data);
+        printf("compare->data = %d\n", compare->data); // 같을 것으로 예상
     }
 }
 int main()
@@ -153,7 +114,7 @@ int main()
     */
 
     int data;
-    for (int i = 0; i < LENGTH; i++)
+    for (int i = 0; i < 5; i++)
     {
         printf("값을 입력해주세요: ");
         scanf("%d", &data);
@@ -164,7 +125,6 @@ int main()
         printf("추가된 노드의 값: %d\n", bcList->crnt->data);
         printf("추가된 노드의 우측 값: %d\n\n", bcList->crnt->rlink->data);
     }
-    // printf("첫 번째 노드값: %d\n", bcList->head->data);
 
     /*
     // addLast() 확인
@@ -196,22 +156,4 @@ int main()
     */
     bcList->crnt = bcList->crnt->rlink;
     SelectionSort(bcList);
-
-    printf("정렬 이후\n");
-    Node *p = bcList->head;
-    int cnt = 1;
-    int sum = 0;
-    double avg;
-    while (p->rlink != bcList->head)
-    {
-        printf("%d 번째 노드: %d\n", cnt, p->data);
-        sum += p->data;
-        p = p->rlink;
-        cnt++;
-    }
-    printf("%d 번째 노드: %d\n", cnt, p->data);
-    sum += p->data;
-    avg = sum / (double)LENGTH;
-    printf("bcList 내의 %d개의 원소 값의 합: %d\n", LENGTH, sum);
-    printf("bcList 내의 %d개의 원소 값의 평균: %f\n", LENGTH, avg);
 }

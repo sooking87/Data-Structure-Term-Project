@@ -197,7 +197,7 @@ int main()
     bcList->crnt = bcList->crnt->rlink;
     SelectionSort(bcList);
 
-    printf("정렬 이후\n");
+    printf("정렬 이후\n오름차순 ver.\n");
     Node *p = bcList->head;
     int cnt = 1;
     int sum = 0;
@@ -214,4 +214,22 @@ int main()
     avg = sum / (double)LENGTH;
     printf("bcList 내의 %d개의 원소 값의 합: %d\n", LENGTH, sum);
     printf("bcList 내의 %d개의 원소 값의 평균: %f\n", LENGTH, avg);
+
+    printf("\n정렬 이후\n내림차순 ver.\n");
+    Node *p2 = bcList->head->llink;
+    int cnt2 = 1;
+    int sum2 = 0;
+    double avg2;
+    while (p2->llink != bcList->head->llink)
+    {
+        printf("%d 번째 노드: %d\n", cnt2, p2->data);
+        sum2 += p2->data;
+        p2 = p2->llink;
+        cnt2++;
+    }
+    printf("%d 번째 노드: %d\n", cnt2, p2->data);
+    sum2 += p2->data;
+    avg2 = sum2 / (double)LENGTH;
+    printf("bcList 내의 %d개의 원소 값의 합: %d\n", LENGTH, sum2);
+    printf("bcList 내의 %d개의 원소 값의 평균: %f\n", LENGTH, avg2);
 }
