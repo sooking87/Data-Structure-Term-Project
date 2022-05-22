@@ -13,20 +13,20 @@
 리스트 구성 과정
  -> 단순 이중 연결 리스트 선택
     헤더 노드 형태 : length, top, tail로 구성되어 있습니다.
-        -	리스트 길이 : 프로그램 작성 중에 스택에 노드가 쌓인 개수를 통해서 삽입, 삭제된 노드를 보다 직관적으로 파악할 수 있습니다. 또한 후위 표기법에서 length만큼 반복문을 수행하면서 계산합니다.
-        -	top : 스택의 top 노드를 가리키는 포인터입니다.
-        -	tail : 스택의 첫 노드를 가리키는 포인터로서, 후위 표기법을 계산하는 과정에서 스택의 첫 노드부터 연산하기 위해서 넣었습니다. (마지막 노드를 구하기 위한 반복적인 과정을 하지 않아도 됩니다.)
+        -   리스트 길이 : 프로그램 작성 중에 스택에 노드가 쌓인 개수를 통해서 삽입, 삭제된 노드를 보다 직관적으로 파악할 수 있습니다. 또한 후위 표기법에서 length만큼 반복문을 수행하면서 계산합니다.
+        -   top : 스택의 top 노드를 가리키는 포인터입니다.
+        -   tail : 스택의 첫 노드를 가리키는 포인터로서, 후위 표기법을 계산하는 과정에서 스택의 첫 노드부터 연산하기 위해서 넣었습니다. (마지막 노드를 구하기 위한 반복적인 과정을 하지 않아도 됩니다.)
     단순 이중 연결 리스트 선택 이유
         헤더 노드의 형태에서도 확인할 수 있듯이 tail에서 top까지 이동하면서 계산을 수행하고자 하였으므로 llink를 추가하여 단순 이중 연결 리스트를 통해서 수식의 계산을 하였습니다.
 함수 설명
-    -	linkedList *createStack() : 새로운 스택을 만들어줌과 동시에 해더 노드를 초기화 시켜 줍니다.
-    -	int isEmpty(int *top) : 스택이 비었는지 비어있지 않은지를 판별해줍니다.
-    -	void push(linkedList *stack, int data) : stack에 data를 넣어줍니다.
-    -	int pop(linkedList *stack) : stack의 top 부분을 제거합니다. 하지만 free()를 통해서 동적 메모리 할당을 해제 시켜버리면 다른 스택에서 사용될 값이 사라질 수 있으므로 연결만 끊는 식으로 pop()을 만들었습니다.
-    -	int peek(linkedList *stack) : stack의 top에 있는 원소를 리턴합니다. (스택 내의 제일 윗 부분에 있는 원소를 확인합니다.
-    -	int operator(char op) : op에 대한 스택 내 우선순위를 리턴합니다.
-    -	void infix_to_postfix(char exp[], linkedList *str) : 중위 표기식(입력 받은 값)인 exp를 후위 표기식으로 바꾸어 스택 str에 넣어줍니다.
-    -	int Calculate(linkedList *str) : 후위 표기식으로 바뀐 exp를 계산해주는 함수입니다.
+    -   linkedList *createStack() : 새로운 스택을 만들어줌과 동시에 해더 노드를 초기화 시켜 줍니다.
+    -   int isEmpty(int *top) : 스택이 비었는지 비어있지 않은지를 판별해줍니다.
+    -   void push(linkedList *stack, int data) : stack에 data를 넣어줍니다.
+    -   int pop(linkedList *stack) : stack의 top 부분을 제거합니다. 하지만 free()를 통해서 동적 메모리 할당을 해제 시켜버리면 다른 스택에서 사용될 값이 사라질 수 있으므로 연결만 끊는 식으로 pop()을 만들었습니다.
+    -   int peek(linkedList *stack) : stack의 top에 있는 원소를 리턴합니다. (스택 내의 제일 윗 부분에 있는 원소를 확인합니다.
+    -   int operator(char op) : op에 대한 스택 내 우선순위를 리턴합니다.
+    -   void infix_to_postfix(char exp[], linkedList *str) : 중위 표기식(입력 받은 값)인 exp를 후위 표기식으로 바꾸어 스택 str에 넣어줍니다.
+    -   int Calculate(linkedList *str) : 후위 표기식으로 바뀐 exp를 계산해주는 함수입니다.
 전체적인 함수 진행 구조
     -  입력받은 중위 표기식을 후위 표기식으로 바꾸어 줍니다. (infix_to_postfix())
     -  후위 표기식을 가지고 Calculate()를 사용하여서 계산합니다.

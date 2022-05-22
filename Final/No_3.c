@@ -1,4 +1,3 @@
-/* ============================================================================================================================================================================= */
 /*
 프로젝트명 : Project #3 :: Expression Stack using Array.
 작성자 : IT공학전공_2116313_손수경
@@ -14,14 +13,14 @@
     4.1 int calTopIndex : 스택 cal의 top 인덱스
     4.2 char cal[100] : 후위 표기식을 연산하는 과정에서 쓰이는 스택
 함수 설명
-    -	int isEmpty(int *top) : 배열이 비었는지 비어있지 않은지를 판별해줍니다.
-    -	int isFull(int *top) : 배열이 꽉 찼는지 아닌지를 판별해줍니다.
-    -	void push(char stack[], int *top, int item) : stack의 *top을 1 증가하고 그 위치에 item을 추가해줍니다. **어떤 스택**의 top부분에 item을 추가할 지 정할 수 있습니다.
-    -	int pop(char stack[], int *top) : stack의 top에 있는 요소를 빼고, top은 1 감소시킵니다. 빠진 data를 리턴을 합니다. **어떤 스택**의 top부분을 pop할 것인지를 정할 수 있습니다.
-    -	int peek(char stack[], int *top) : stack의 top에 있는 원소를 리턴합니다. (스택 내의 제일 윗 부분에 있는 원소를 확인합니다. ) 어떤 스택의 top부분을 peek할 것인지를 정할 수 있습니다.
-    -	int operator(char op) : op에 대한 스택 내 우선순위를 리턴합니다.
-    -	void infix_to_postfix(char exp[], char str[]) : 중위 표기식(입력 받은 값)인 exp를 후위 표기식으로 바꾸어 배열 str에 넣어줍니다.
-    -	int Calculate(char exp[]) : 후위 표기식으로 바뀐 exp를 계산해주는 함수입니다.
+    -   int isEmpty(int *top) : 배열이 비었는지 비어있지 않은지를 판별해줍니다.
+    -   int isFull(int *top) : 배열이 꽉 찼는지 아닌지를 판별해줍니다.
+    -   void push(char stack[], int *top, int item) : stack의 *top을 1 증가하고 그 위치에 item을 추가해줍니다. **어떤 스택**의 top부분에 item을 추가할 지 정할 수 있습니다.
+    -   int pop(char stack[], int *top) : stack의 top에 있는 요소를 빼고, top은 1 감소시킵니다. 빠진 data를 리턴을 합니다. **어떤 스택**의 top부분을 pop할 것인지를 정할 수 있습니다.
+    -   int peek(char stack[], int *top) : stack의 top에 있는 원소를 리턴합니다. (스택 내의 제일 윗 부분에 있는 원소를 확인합니다. ) 어떤 스택의 top부분을 peek할 것인지를 정할 수 있습니다.
+    -   int operator(char op) : op에 대한 스택 내 우선순위를 리턴합니다.
+    -   void infix_to_postfix(char exp[], char str[]) : 중위 표기식(입력 받은 값)인 exp를 후위 표기식으로 바꾸어 배열 str에 넣어줍니다.
+    -   int Calculate(char exp[]) : 후위 표기식으로 바뀐 exp를 계산해주는 함수입니다.
 전체적인 함수 진행 구조
     -  입력받은 중위 표기식을 후위 표기식으로 바꾸어 줍니다. (infix_to_postfix())
     -  후위 표기식을 가지고 Calculate()를 사용하여서 계산합니다.
