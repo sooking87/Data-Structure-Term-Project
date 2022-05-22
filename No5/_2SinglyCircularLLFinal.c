@@ -111,7 +111,8 @@ void addLast(SinglyCircularLL *list, element *item)
     // printf("list->crnt->rlink->data.num = %d\n", list->crnt->rlink->data.num); // 예상: All 1번(첫 번째 노드를 가리키게 하고 싶으므로 )
 }
 
-element *delete (SinglyCircularLL *list) // 코드 작성 과정에서는 지워진 노드의 확인을 위해서 element *를 리턴형으로 잡았습니다. 하지만 전반적인 출력 과정에서는 필요가 없으므로 void로 바꾸었습니다.
+// element *delete (SinglyCircularLL *list)
+void delete (SinglyCircularLL *list) // 코드 작성 과정에서는 지워진 노드의 확인을 위해서 element *를 리턴형으로 잡았습니다. 하지만 전반적인 출력 과정에서는 필요가 없으므로 void로 바꾸었습니다.
 {
     if (isEmpty(list))
     {

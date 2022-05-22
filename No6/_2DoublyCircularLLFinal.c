@@ -33,10 +33,8 @@ DoublyCircularLL *createList()
     // printf("길이 선언하고\n");
     H->crnt = (Node *)malloc(sizeof(Node));
     H->head = (Node *)malloc(sizeof(Node));
-    H->crnt->rlink = H->crnt;
-    H->crnt->llink = H->crnt;
-    H->head->rlink = H->head;
-    H->head->llink = H->head;
+    H->crnt = NULL;
+    H->head = NULL;
     // printf("원형 연결 리스트 만들고\n");
     // printf("빈 리스트 생성 완료\n");
     return H;
@@ -44,7 +42,7 @@ DoublyCircularLL *createList()
 
 int isEmpty(DoublyCircularLL *list)
 {
-    return (list->head->rlink == list->head);
+    return (list->head == NULL);
 }
 
 void addLast(DoublyCircularLL *list, element *item)
@@ -64,29 +62,29 @@ void addLast(DoublyCircularLL *list, element *item)
 
     if (isEmpty(list)) // 첫 노드라면 -> 헤더 노드를 원형 리스트 순환에서 제외시키기 위해서
     {
-        list->head->rlink = newNode;
-        list->head->llink = newNode;
+        list->head = newNode;
+        list->crnt = newNode;
+        newNode->rlink = newNode;
+        newNode->llink = newNode;
+    }
+    else
+    {
+        newNode->llink = list->crnt;
+        newNode->rlink = list->head; // newNode를 첫 번째 노드에 오른쪽 방향으로 연결
+        list->head->llink = newNode; // list->head->llink : 첫 번째 노드 ->llink라는 것은 첫 번째 노드의 왼쪽 노드가 newNode라는 것
         list->crnt->rlink = newNode;
-        list->crnt->llink = newNode;
+        list->crnt = newNode;
+        // printf("list->crnt->llink->data.num = %d\n", list->crnt->llink->data.num);                // 현재 노드의 앞쪽 노드가 나와야됨.
+        // printf("list->head->llink->llink->data.num =  %d\n", list->head->llink->llink->data.num); // 추가된 노드의 번호가 나와야됨
     }
 
-    /* rlink 연결 */
-    newNode->rlink = list->crnt->rlink; // newNode를 첫 번째 노드에 오른쪽 방향으로 연결
-    list->crnt->rlink = newNode;
-    /* llink 연결 */
-    newNode->llink = list->crnt;
-    list->head->llink->llink = newNode; // list->head->llink : 첫 번째 노드 ->llink라는 것은 첫 번째 노드의 왼쪽 노드가 newNode라는 것
-
-    list->crnt = newNode;
-    // printf("list->crnt->llink->data.num = %d\n", list->crnt->llink->data.num);                // 현재 노드의 앞쪽 노드가 나와야됨.
-    // printf("list->head->llink->llink->data.num =  %d\n", list->head->llink->llink->data.num); // 추가된 노드의 번호가 나와야됨
     list->length++;
 }
 
 // element *delete (DoublyCircularLL *list)
 void *delete (DoublyCircularLL *list)
 {
-    if (list->length == 0)
+    if (isEmpty(list))
     {
         printf("List is EMPTY\n");
         exit(1);
@@ -96,14 +94,13 @@ void *delete (DoublyCircularLL *list)
     {
         Node *remove = list->crnt;
         // printf("remove->data.num = %d\n", remove->data.num);
-        element *returnData = &(remove->data);
+        // element *returnData = &(remove->data);
         // printf("returnData->num = %d\n", returnData->num);
         Node *prev = list->crnt->llink;
         // printf("prev->data.num = %d\n", prev->data.num);
-        if (remove->data.num == list->head->rlink->data.num)
+        if (remove == list->head)
         {
-            list->head->rlink = remove->rlink;
-            list->head->llink = remove->rlink;
+            list->head = remove->rlink;
             // printf("remove->rlink->llink->data.num = %d\n", remove->rlink->llink->data.num);
         }
         list->crnt = remove->rlink;
@@ -111,7 +108,7 @@ void *delete (DoublyCircularLL *list)
         remove->rlink->llink = remove->llink;
         list->length--;
         free(remove);
-        return returnData;
+        // return returnData;
     }
 }
 
@@ -174,8 +171,8 @@ int main()
     Node *rlinkTest = pplList->crnt;
     printf("\nMain\n");
     printf("pplList->crnt: %p\n", pplList->crnt->rlink);
-    while (rlinkTest->rlink != pplList->crnt)
-    // for (int i = 0; i < LENGTH; i++)
+    // while (rlinkTest->rlink != pplList->crnt)
+    for (int i = 0; i < LENGTH; i++)
     {
         rlinkTest = rlinkTest->rlink;
         printf("%d. %s 노드 push 완료\n", rlinkTest->data.num, rlinkTest->data.name);
@@ -184,6 +181,7 @@ int main()
     }
     printf("rlink_push 확인을 위한 출력 종료\n\n");
     */
+
     /*
      // * llink 기준 출력 *
      Node *llinkTest = pplList->crnt;
@@ -222,7 +220,7 @@ int main()
         moveCrntR(pplList, skipNum);
     }
 
-    Node *finalListR = pplList->head->rlink;
+    Node *finalListR = pplList->head;
     printf("배를 타고 무인도를 탈출할 최종 3인은 ");
     for (int i = 0; i < 3; i++)
     {
@@ -244,7 +242,7 @@ int main()
         moveCrntL(pplList, skipNum);
     }
 
-    Node *finalListL = pplList->head->rlink;
+    Node *finalListL = pplList->head;
     printf("배를 타고 무인도를 탈출할 최종 3인은 ");
     for (int i = 0; i < 3; i++)
     {
