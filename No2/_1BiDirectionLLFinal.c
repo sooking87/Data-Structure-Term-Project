@@ -53,7 +53,6 @@ void addLast(BiDirectionCLL *bcList, int data)
     if (isEmpty(bcList))
     {
         // printf("첫 노드라면\n");
-        bcList->length = 1;
         // printf("길이 설정: bcList->length = %d\n", bcList->length);
         bcList->head = newNode;
         // printf("head를 newNode로 설정: bcList->head->data = %d\n", bcList->head->data);
@@ -68,13 +67,13 @@ void addLast(BiDirectionCLL *bcList, int data)
         bcList->crnt->rlink = newNode;
         bcList->head->llink = newNode;
         bcList->crnt = newNode;
-        bcList->length++;
         // printf("bcList->crnt->data = %d\n", bcList->crnt->data);               // 현재 넣은 노드의 값이 출력될 것 -> ok
         // printf("bcList->head->rlink->data = %d\n", bcList->head->rlink->data); // 첫 번째 노드 다음 노드의 번호 출력 예상 -> ok
         // printf("bcList->head->llink->data = %d\n", bcList->head->llink->data); // 현재 넣은 값(마지막 노드)가 될 것을 예상 -> ok
     }
     // printf("bcList->head->data = %d\n", bcList->head->data);
     // printf("addLast 정상 종료\n");
+    bcList->length++;
 }
 
 void swap(int *standard, int *min)
@@ -196,7 +195,7 @@ int main()
     */
     bcList->crnt = bcList->crnt->rlink;
     SelectionSort(bcList);
-
+    // printf("bcList->length = %d\n", bcList->length);
     printf("정렬 이후\n오름차순 ver.\n");
     Node *p = bcList->head;
     int cnt = 1;
