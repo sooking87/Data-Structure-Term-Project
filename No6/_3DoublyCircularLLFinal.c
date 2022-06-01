@@ -20,15 +20,16 @@
 함수 설명
 - DoublyCircularLL *createList() : 처음 새로운 원형 연결 리스트를 만들 때 사용됩니다. 헤더 노드의 메모리를 할당 받고, 헤더 노드를 구성하고 있는 length는 0으로, crnt, head를 NULL로 초기화 시켜주는 역할을 합니다.
 -  int isEmpty(DoublyCircularLL *list) : 리스트가 비어있는 노드인지 아닌지를 판별해줍니다. list->head == NULL 조건이 참이라면 빈 리스트라는 의미로 1을 리턴하고, 그렇지 않다면 0을 리턴합니다.
--   void addLast(DoublyCircularLL *list, element *item) : 마지막 노드 뒤에 새로운 노드를 추가해줍니다. 그때의 노드는 item 데이터를 가지고 있습니다.
+-	void addLast(DoublyCircularLL *list, element *item) : 마지막 노드 뒤에 새로운 노드를 추가해줍니다. 그때의 노드는 item 데이터를 가지고 있습니다.
 -   element *delete(DoublyCircularLL *list) : list에서 list->crnt를 지워주는 함수입니다.
--   moveCrntR() / moveCrntL() 은 pplList->crnt를 이동시켜서 지울 노드를 가리키도록 하는 함수는 맞습니다. 하지만 문제에서 순방향으로 출력시키고, 역방향으로 출력시키라고 하였으므로 두 개로 분리하여서 순방향으로 출력시키기 위해서는 moveCrntR()를 통해서 crnt를 이동시키고, 역방향으로 출력시키기 위해서는 moveCrntL()을 통해서 crnt를 이동시킵니다.
+-	moveCrntR() / moveCrntL() 은 pplList->crnt를 이동시켜서 지울 노드를 가리키도록 하는 함수는 맞습니다. 하지만 문제에서 순방향으로 출력시키고, 역방향으로 출력시키라고 하였으므로 두 개로 분리하여서 순방향으로 출력시키기 위해서는 moveCrntR()를 통해서 crnt를 이동시키고, 역방향으로 출력시키기 위해서는 moveCrntL()을 통해서 crnt를 이동시킵니다.
 전체적인 함수 진행 구조
-    -   1). addLast()를 통해서 사람의 데이터를 pplList에 넣어줍니다.
-    -   2.1). 순방향 출력을 위해서라면 pplList의 길이가 3이 되기 전까지 moveCrntR()을 통해서 skipNum 만큼 crnt를 이동시키면서 해당 노드를 지워줍니다.
-    -   2.2) 역방향 출력을 위해서라면 pplList의 길이가 3이 되기 전까지 moveCrntL()을 통해서 skipNum 만큼 crnt를 이동시키면서 해당 노드를 지워줍니다.
-    -   3). 탈락자가 발생할 때마다, 탈락자와 생존자의 명단을 출력하였습니다. (문제 5_C 항목)
-    -   4). 3명의 데이터를 출력해줍니다.
+    -	1). addLast()를 통해서 사람의 데이터를 pplList에 넣어줍니다.
+    -	2.1). 순방향 출력을 위해서라면 pplList의 길이가 3이 되기 전까지 moveCrntR()을 통해서 skipNum 만큼 crnt를 이동시키면서 해당 노드를 지워줍니다.
+    -	2.2) 역방향 출력을 위해서라면 pplList의 길이가 3이 되기 전까지 moveCrntL()을 통해서 skipNum 만큼 crnt를 이동시키면서 해당 노드를 지워줍니다.
+    -	3). 탈락자가 발생할 때마다, 탈락자와 생존자의 명단을 출력하였습니다. (문제 5_C 항목)
+    -	4). 3명의 데이터를 출력해줍니다.
+
 
 참고한 알고리즘 : 수업 시간에 다룬 이중 원형 리스트 노드 생성 ppt 부분
 도움을 준 동료 : 없음
@@ -278,6 +279,7 @@ int main()
         }
         printf("%d %s \n", temp2->data.num, temp2->data.name);
     }
+
 
     // *순방향으로 이동한 경우
     printf("\n순방향으로 이동한 경우\n");

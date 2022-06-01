@@ -21,12 +21,12 @@
     -   int isEmpty(SinglyCircularLL *list) : 리스트가 비어있는 노드인지 아닌지를 판별해줍니다. list->head == NULL 조건이 참이라면 빈 리스트라는 의미로 1을 리턴하고, 그렇지 않다면 0을 리턴합니다.
     -    void addLast(SinglyCircularLL *list, element *item) : 마지막 노드 뒤에 새로운 노드를 추가해줍니다. 그때의 노드는 item 데이터를 가지고 있습니다.
     -   element * delete(SinglyCircularLL *list) : list에서 list->crnt를 지워주는 함수입니다.
-    -   element *moveCrnt(SinglyCircularLL *list, int skipNum) : pplList->crnt를 skipNum만큼 이동시켜주는 함수입니다.
+    -	element *moveCrnt(SinglyCircularLL *list, int skipNum) : pplList->crnt를 skipNum만큼 이동시켜주는 함수입니다.
 진행 과정
-    -   1). 사람 번호와 이름을 pplList에 넣어줍니다. (addLast() 사용)
-    -   2). pplList의 길이가 3이 되기 전까지 moveCrnt()를 통해서 skipNum만큼 crnt를 이동시키면서 해당 노드를 지워줍니다. (moveCrnt(), delete() 사용)
-    -   3). 탈락자들만 모은 연결 리스트인 loser를 출력해줍니다. 생존자의 경우 처음 입력받은 연결 리스트에 그대로 있으므로 pplList를 통해서 생존자를 출력해줍니다.
-    -   4). 3명의 데이터를 출력해줍니다.
+    -	1). 사람 번호와 이름을 pplList에 넣어줍니다. (addLast() 사용)
+    -	2). pplList의 길이가 3이 되기 전까지 moveCrnt()를 통해서 skipNum만큼 crnt를 이동시키면서 해당 노드를 지워줍니다. (moveCrnt(), delete() 사용)
+    -	3). 탈락자들만 모은 연결 리스트인 loser를 출력해줍니다. 생존자의 경우 처음 입력받은 연결 리스트에 그대로 있으므로 pplList를 통해서 생존자를 출력해줍니다.
+    -	4). 3명의 데이터를 출력해줍니다.
 
 참고한 알고리즘 : 수업 시간에 다룬 단순 원형 리스트 노드 생성 ppt 부분
 도움을 준 동료 : 없음
